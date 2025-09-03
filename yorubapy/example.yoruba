@@ -1,4 +1,4 @@
-ise fi_ka(nomb):
+ise fi_ka(noxmb):
     pada nomb * 2
 
 so(fi_ka(5))

@@ -48,6 +48,7 @@ BASE_MAPPING: Dict[str, str] = {
     "awon_oro": "dict",        # dict (was àwọn ọ̀rọ̀)
     "se": "do",                # do (placeholder for custom functions)
     "se_ni": "make",           # make (placeholder for constructors)
+    "ka": "enumerate",         # enumerate
 }
 
 

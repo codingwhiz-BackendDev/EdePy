@@ -29,45 +29,45 @@ edepy -o out.py example.yoruba    # write translated Python to file
 edepy -y example.yoruba           # run with Yorùbá error messages
 ```
 
-## Language Mapping
+## Language Mapping (Plain Yorùbá - No Accents)
 
 ### Control Flow
 
-- `iṣẹ́` → `def` (function definition)
+- `ise` → `def` (function definition)
 - `pada` → `return`
 - `ti` → `if`
-- `bibẹẹkọ` → `else`
-- `bibẹẹkọ_ti` → `elif`
+- `bibeeko` → `else`
+- `bibeeko_ti` → `elif`
 - `nigbati` → `while`
 - `fun` → `for`
 - `ni` → `in`
-- `gbìyànjú` → `try`
+- `gbeyanju` → `try`
 - `mu` → `except`
-- `kẹ̀yìn` → `finally`
+- `keyin` → `finally`
 - `da` → `break`
-- `tẹ̀síwájú` → `continue`
+- `tesiwaju` → `continue`
 
 ### Logic & Comparison
 
 - `ati` → `and`
 - `tabi` → `or`
-- `kìíṣe`/`kii_se` → `not`
-- `jẹ́` → `is`
-- `kii_se` → `is not`
+- `kii_se` → `not`
+- `je` → `is`
+- `kii_se_ni` → `is not`
 
 ### Data Types & Builtins
 
-- `bẹẹni` → `True`
-- `rárá`/`rara` → `False`
+- `beeni` → `True`
+- `rara` → `False`
 - `ohunkohun` → `None`
 - `so` → `print`
 - `wole` → `input`
 - `gigun` → `len`
-- `akọọlẹ` → `str`
-- `nọ́mbà` → `int`
-- `nọ́mbà_ọ̀nà` → `float`
-- `àkójọ` → `list`
-- `àwọn_ọ̀rọ̀` → `dict`
+- `akooke` → `str`
+- `nomb` → `int`
+- `nomb_ona` → `float`
+- `akojo` → `list`
+- `awon_oro` → `dict`
 
 ### Classes & OOP
 
@@ -81,8 +81,8 @@ edepy -y example.yoruba           # run with Yorùbá error messages
 File: `example.yoruba`
 
 ```text
-iṣẹ́ fi_ka(nọ́mbà):
-    pada nọ́mbà * 2
+ise fi_ka(nomb):
+    pada nomb * 2
 
 so(fi_ka(5))
 ```
@@ -92,21 +92,21 @@ so(fi_ka(5))
 File: `complex_example.yoruba`
 
 ```text
-kilasi Ìṣirò:
-    iṣẹ́ __init__(self, orúkọ):
-        self.orúkọ = orúkọ
-        self.àkójọ_ìṣirò = àkójọ()
+kilasi Isiro:
+    ise __init__(self, oruko):
+        self.oruko = oruko
+        self.akojo_isiro = akojo()
 
-    iṣẹ́ ṣe_ìṣirò(self, a, b, ọ̀nà):
-        ti ọ̀nà == "+":
+    ise se_isiro(self, a, b, ona):
+        ti ona == "+":
             pada a + b
-        bibẹẹkọ_ti ọ̀nà == "*":
+        bibeeko_ti ona == "*":
             pada a * b
         # ... more operations
 
-# Interactive calculator with Yorùbá interface
-ìṣirò = Ìṣirò("Yorùbá")
-ìṣirò.ṣe_ìṣirò_àgbáyé_loop()
+# Interactive calculator with Yoruba interface
+isiro = Isiro("Yoruba")
+isiro.se_isiro_agbaye_loop()
 ```
 
 ## Error Messages in Yorùbá
@@ -119,12 +119,12 @@ edepy -y error_test.yoruba
 
 Common error translations:
 
-- `NameError` → `Àṣìṣe Orúkọ:`
-- `TypeError` → `Àṣìṣe Irú:`
-- `ValueError` → `Àṣìṣe Ìyí:`
-- `IndexError` → `Àṣìṣe Ìpín:`
-- `ZeroDivisionError` → `Àṣìṣe Pínyà:`
-- `FileNotFoundError` → `Fáìlì Kò Sí:`
+- `NameError` → `Asise Oruko:`
+- `TypeError` → `Asise Iru:`
+- `ValueError` → `Asise Iyi:`
+- `IndexError` → `Asise Ipin:`
+- `ZeroDivisionError` → `Asise Pinya:`
+- `FileNotFoundError` → `Faiili Ko Si:`
 
 ## How It Works
 
@@ -141,8 +141,8 @@ Add new keywords in `src/yorubapy/transpile.py`:
 ```python
 BASE_MAPPING: Dict[str, str] = {
     # ... existing mappings
-    "ọ̀rọ̀_kíní": "first",      # new keyword
-    "ọ̀rọ̀_kẹhìn": "last",     # new keyword
+    "oro_kin": "first",        # new keyword
+    "oro_kehin": "last",       # new keyword
 }
 ```
 
@@ -165,7 +165,7 @@ edepy -e complex_example.yoruba
 ## Features
 
 ✅ **Real Python Apps**: Transpiles to valid Python that runs normally  
-✅ **Yorùbá Keywords**: Comprehensive mapping for control flow, data types, and builtins  
+✅ **Plain Yorùbá Keywords**: Easy-to-type keywords without accents  
 ✅ **Error Messages**: Native Yorùbá error messages with `-y` flag  
 ✅ **Token Safety**: Only replaces actual code tokens, preserves strings/comments  
 ✅ **Complex Programs**: Supports classes, functions, loops, error handling  
@@ -174,7 +174,7 @@ edepy -e complex_example.yoruba
 ## Next Steps
 
 - Add more Yorùbá idioms and expressions
-- Support for multi-word keywords (e.g., "bibẹẹkọ ti" → "elif")
+- Support for multi-word keywords (e.g., "bibeeko ti" → "elif")
 - Standard library wrappers with Yorùbá names
 - Interactive REPL mode
 - Package management for Yorùbá modules

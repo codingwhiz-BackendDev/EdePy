@@ -49,7 +49,7 @@ kilasi Isiro:
                         a = nomb(nomb_akojo[0])
                         b = nomb(nomb_akojo[1])
                         esi = self.se_isiro(a, b, ona)
-                        ti esi kii_se ohunkohun:
+                        ti esi kii_se_ni ohunkohun:
                             so(f"{a} {ona} {b} = {esi}")
                             self.akojo_isiro.append(f"{a} {ona} {b} = {esi}")
                         pada esi
@@ -74,8 +74,8 @@ kilasi Isiro:
                 tesiwaju
         
         so("Itan isiro:")
-        fun i, isiro ni enumerate(self.akojo_isiro, 1):
-            so(f"{i}. {isiro}")
+        fun i, isiro ni ka(self.akojo_isiro):
+            so(f"{i + 1}. {isiro}")
 
 
 # Ise pataki
