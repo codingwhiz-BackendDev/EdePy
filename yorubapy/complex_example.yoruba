@@ -1,0 +1,104 @@
+# Koodu Yoruba - Ise Isiro (Calculator App)
+
+kilasi Isiro:
+    ise __init__(self, oruko):
+        self.oruko = oruko
+        self.akojo_isiro = akojo()
+    
+    ise se_isiro(self, a, b, ona):
+        ti ona == "+":
+            pada a + b
+        bibeeko_ti ona == "-":
+            pada a - b
+        bibeeko_ti ona == "*":
+            pada a * b
+        bibeeko_ti ona == "/":
+            ti b == 0:
+                so("Asise: Ko see pin pelu odo!")
+                pada ohunkohun
+            pada a / b
+        bibeeko:
+            so(f"Ona isiro ti ko mo: {ona}")
+            pada ohunkohun
+    
+    ise se_isiro_pelu_akojo(self, nomb_akojo, ona):
+        ti gigun(nomb_akojo) == 0:
+            pada 0
+        
+        esi = nomb_akojo[0]
+        fun i ni nomb_akojo[1:]:
+            esi = self.se_isiro(esi, i, ona)
+        pada esi
+    
+    ise se_isiro_agbaye(self, oro):
+        gbeyanju:
+            ti oro == "quit":
+                pada "O dabo!"
+            
+            ti oro == "help":
+                so("Ona isiro: +, -, *, /")
+                so("Apeere: 5 + 3, 10 * 2")
+                so("Se 'quit' lati jade")
+                pada "Iranlowo ti a se!"
+            
+            oro = oro.replace(" ", "")
+            fun ona ni ["+", "-", "*", "/"]:
+                ti ona ni oro:
+                    nomb_akojo = oro.split(ona)
+                    ti gigun(nomb_akojo) == 2:
+                        a = nomb(nomb_akojo[0])
+                        b = nomb(nomb_akojo[1])
+                        esi = self.se_isiro(a, b, ona)
+                        ti esi kii_se ohunkohun:
+                            so(f"{a} {ona} {b} = {esi}")
+                            self.akojo_isiro.append(f"{a} {ona} {b} = {esi}")
+                        pada esi
+            
+            so("Isoro ti ko mo. Se 'help' lati ri iranlowo.")
+            pada ohunkohun
+            
+        mu Exception as e:
+            so(f"Asise: {e}")
+            pada ohunkohun
+    
+    ise se_isiro_agbaye_loop(self):
+        so(f"Kaabo si Isiro {self.oruko}!")
+        so("Se 'help' lati ri iranlowo, 'quit' lati jade")
+        
+        nigbati beeni:
+            oro = wole("Se isiro: ")
+            esi = self.se_isiro_agbaye(oro)
+            ti esi == "O dabo!":
+                da
+            ti esi == "Iranlowo ti a se!":
+                tesiwaju
+        
+        so("Itan isiro:")
+        fun i, isiro ni enumerate(self.akojo_isiro, 1):
+            so(f"{i}. {isiro}")
+
+
+# Ise pataki
+ise main():
+    so("Bere Isiro Yoruba!")
+    
+    # Se isiro kan
+    isiro = Isiro("Yoruba")
+    
+    # Se isiro pelu akojo
+    nomb_akojo = akojo([1, 2, 3, 4, 5])
+    so(f"Akojo nomb: {nomb_akojo}")
+    
+    esi_akojo = isiro.se_isiro_pelu_akojo(nomb_akojo, "+")
+    so(f"Isiro akojo (+): {esi_akojo}")
+    
+    esi_akojo = isiro.se_isiro_pelu_akojo(nomb_akojo, "*")
+    so(f"Isiro akojo (*): {esi_akojo}")
+    
+    # Bere isiro igbeyaw
+    isiro.se_isiro_agbaye_loop()
+
+
+# Se isiro ti a fi ise main
+ti __name__ == "__main__":
+    main()

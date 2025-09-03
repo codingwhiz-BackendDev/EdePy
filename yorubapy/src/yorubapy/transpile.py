@@ -2,16 +2,18 @@ from io import BytesIO
 import tokenize
 from token import NAME
 from typing import Dict
+import sys
 
 
 # Base Yoruba -> Python mapping for keywords and common builtins
+# Using plain (non-accented) characters for easier typing
 BASE_MAPPING: Dict[str, str] = {
     # Keywords
-    "ise": "def",            # function def
+    "ise": "def",             # function def (was iṣẹ́)
     "pada": "return",         # return
     "ti": "if",               # if
-    "bibeekọ": "else",        # else
-    "bibeekọ_ti": "elif",     # elif
+    "bibeeko": "else",        # else (was bibẹẹkọ)
+    "bibeeko_ti": "elif",     # elif (was bibẹẹkọ_ti)
     "nigbati": "while",       # while
     "fun": "for",             # for
     "ni": "in",               # in
@@ -19,19 +21,83 @@ BASE_MAPPING: Dict[str, str] = {
     "ati": "and",             # logical and
     "tabi": "or",             # logical or
     "kii_se": "not",          # not (ASCII-friendly)
-    "kiise": "not",           # not (accented)
+    "gbeyanju": "try",        # try (was gbìyànjú)
+    "mu": "except",            # except
+    "keyin": "finally",        # finally (was kẹ̀yìn)
+    "da": "break",             # break
+    "tesiwaju": "continue",    # continue (was tẹ̀síwájú)
+    "kilasi": "class",         # class
+    "iru": "type",             # type
+    "fi": "with",              # with
+    "je": "is",                # is (was jẹ́)
+    "kii_se_ni": "is not",     # is not (was kii_se)
     
     # Booleans / null
-    "beeni": "True",          # True
-    "rara": "False",          # False
-    "rara": "False",          # False (alt)
-    "ohunkohun": "None",      # None
+    "beeni": "True",           # True (was bẹẹni)
+    "rara": "False",           # False (was rárá)
+    "ohunkohun": "None",       # None
 
     # Common builtins
-    "so": "print",            # print
-    "wole": "input",          # input
-    "gigun": "len",           # len
+    "so": "print",             # print
+    "wole": "input",           # input
+    "gigun": "len",            # len
+    "akooke": "str",           # str (was akọọlẹ)
+    "nomb": "int",             # int (was nọ́mbà)
+    "nomb_ona": "float",       # float (was nọ́mbà ọ̀nà)
+    "akojo": "list",           # list (was àkójọ)
+    "awon_oro": "dict",        # dict (was àwọn ọ̀rọ̀)
+    "se": "do",                # do (placeholder for custom functions)
+    "se_ni": "make",           # make (placeholder for constructors)
 }
+
+
+def translate_error_message(error_msg: str) -> str:
+    """Translate common Python error messages to Yorùbá."""
+    error_mapping = {
+        "NameError": "Asise Oruko:",
+        "TypeError": "Asise Iru:",
+        "ValueError": "Asise Iyi:",
+        "IndexError": "Asise Ipin:",
+        "KeyError": "Asise Ile:",
+        "AttributeError": "Asise Asa:",
+        "SyntaxError": "Asise Isoro:",
+        "IndentationError": "Asise Iduro:",
+        "ZeroDivisionError": "Asise Pinya:",
+        "FileNotFoundError": "Faiili Ko Si:",
+        "PermissionError": "Asise Iya:",
+        "ModuleNotFoundError": "Moduulu Ko Si:",
+        "ImportError": "Asise Igbewole:",
+        "RuntimeError": "Asise Isise:",
+        "Exception": "Asise:",
+        "Error": "Asise:",
+        "Traceback": "Itan Asise:",
+        "line": "ona",
+        "in": "ninu",
+        "module": "moduulu",
+        "function": "ise",
+        "class": "kilasi",
+        "method": "ona",
+        "attribute": "asa",
+        "argument": "oro",
+        "parameter": "oro",
+        "variable": "oro",
+        "string": "oro",
+        "integer": "nomb",
+        "float": "nomb ona",
+        "list": "akojo",
+        "dictionary": "awon oro",
+        "tuple": "akojo ti ko see yi",
+        "set": "akojo ti ko see yi",
+        "boolean": "oro ti o je beeni tabi rara",
+        "None": "ohunkohun",
+        "True": "beeni",
+        "False": "rara",
+    }
+    
+    translated = error_msg
+    for english, yoruba in error_mapping.items():
+        translated = translated.replace(english, yoruba)
+    return translated
 
 
 def translate_yoruba(source_code: str, mapping: Dict[str, str] | None = None) -> str:
@@ -57,6 +123,27 @@ def translate_yoruba(source_code: str, mapping: Dict[str, str] | None = None) ->
     if isinstance(result, bytes):
         return result.decode("utf-8")
     return result
+
+
+def translate_and_run_with_yoruba_errors(source_code: str, filename: str = "<yorubapy>") -> tuple[str, int]:
+    """Translate Yorùbá code and run it with Yorùbá error messages."""
+    translated = translate_yoruba(source_code)
+    
+    try:
+        exec(compile(translated, filename, "exec"))
+        return translated, 0
+    except Exception as e:
+        # Get the original traceback
+        import traceback
+        tb = traceback.format_exc()
+        
+        # Translate error messages to Yorùbá
+        yoruba_tb = translate_error_message(tb)
+        
+        # Print Yorùbá error message
+        print(f"Asise ninu koodu Yoruba:\n{yoruba_tb}", file=sys.stderr)
+        
+        return translated, 1
 
 
 def translate_file(path: str) -> str:

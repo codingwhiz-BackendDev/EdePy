@@ -1,0 +1,14 @@
+# Test file to demonstrate Yoruba error messages
+
+# This will cause a NameError
+so(undefined_variable)
+
+# This will cause a TypeError
+so(5 + "oro")
+
+# This will cause a ZeroDivisionError
+so(10 / 0)
+
+# This will cause an IndexError
+akojo = akojo([1, 2, 3])
+so(akojo[10])
