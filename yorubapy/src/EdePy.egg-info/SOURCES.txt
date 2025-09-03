@@ -1,0 +1,11 @@
+pyproject.toml
+src/EdePy.egg-info/PKG-INFO
+src/EdePy.egg-info/SOURCES.txt
+src/EdePy.egg-info/dependency_links.txt
+src/EdePy.egg-info/entry_points.txt
+src/EdePy.egg-info/top_level.txt
+src/edepy/__init__.py
+src/edepy/cli.py
+src/yorubapy/__init__.py
+src/yorubapy/cli.py
+src/yorubapy/transpile.py

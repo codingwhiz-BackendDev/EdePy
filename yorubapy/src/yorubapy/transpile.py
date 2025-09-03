@@ -7,11 +7,11 @@ from typing import Dict
 # Base Yoruba -> Python mapping for keywords and common builtins
 BASE_MAPPING: Dict[str, str] = {
     # Keywords
-    "iṣẹ́": "def",            # function def
+    "ise": "def",            # function def
     "pada": "return",         # return
     "ti": "if",               # if
-    "bibẹẹkọ": "else",        # else
-    "bibẹẹkọ_ti": "elif",     # elif
+    "bibeekọ": "else",        # else
+    "bibeekọ_ti": "elif",     # elif
     "nigbati": "while",       # while
     "fun": "for",             # for
     "ni": "in",               # in
@@ -19,17 +19,17 @@ BASE_MAPPING: Dict[str, str] = {
     "ati": "and",             # logical and
     "tabi": "or",             # logical or
     "kii_se": "not",          # not (ASCII-friendly)
-    "kìíṣe": "not",           # not (accented)
+    "kiise": "not",           # not (accented)
     
     # Booleans / null
-    "bẹẹni": "True",          # True
-    "rárá": "False",          # False
+    "beeni": "True",          # True
+    "rara": "False",          # False
     "rara": "False",          # False (alt)
     "ohunkohun": "None",      # None
 
     # Common builtins
     "so": "print",            # print
-    "wọlé": "input",          # input
+    "wole": "input",          # input
     "gigun": "len",           # len
 }
 
