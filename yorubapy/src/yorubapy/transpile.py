@@ -42,13 +42,17 @@ BASE_MAPPING: Dict[str, str] = {
     "wole": "input",           # input
     "gigun": "len",            # len
     "akooke": "str",           # str (was akọọlẹ)
-    "nomb": "int",             # int (was nọ́mbà)
-    "nomb_ona": "float",       # float (was nọ́mbà ọ̀nà)
+    "nomb": "int",             # int function (was nọ́mbà)
+    "nomb_ona": "float",       # float function (was nọ́mbà ọ̀nà)
     "akojo": "list",           # list (was àkójọ)
     "awon_oro": "dict",        # dict (was àwọn ọ̀rọ̀)
     "se": "do",                # do (placeholder for custom functions)
     "se_ni": "make",           # make (placeholder for constructors)
     "ka": "enumerate",         # enumerate
+    "fi": "open",              # open file
+    "pa": "close",             # close file
+    "ka_faiili": "read",       # read file
+    "ko_si_faiili": "write",   # write to file
 }
 
 
